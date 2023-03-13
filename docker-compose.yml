@@ -1,0 +1,23 @@
+version: "3.6"
+services:
+  mssql-db:
+    labels:
+      - project=example
+      - system=database
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    user: root
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1q2w3e4r5t6y
+      - MSSQL_COLLATION=Thai_100_CI_AS_SC_UTF8
+    cap_add:
+      - SYS_PTRACE
+    ports:
+      - "42010:1433"
+    volumes:
+      - ./data:/var/opt/mssql/data
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 2048M
